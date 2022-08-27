@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\EventsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,10 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/me', [AuthController::class, 'me']);
     Route::post('', 'AuthController@refresh');
+});
+
+
+Route::group(['as' => 'api.'], function () {
+    Orion::resource('events', EventsController::class);
 });
 
