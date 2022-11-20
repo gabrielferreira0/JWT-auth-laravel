@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Validator;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class AuthController extends Controller
 {
@@ -48,6 +50,10 @@ class AuthController extends Controller
             $validator->validated(),
             ['password' => bcrypt($request->password)]
         ));
+        
+        $permission = Permission::create(['name' => 'edit events']);
+        $user->givePermissionTo('edit events');
+
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user

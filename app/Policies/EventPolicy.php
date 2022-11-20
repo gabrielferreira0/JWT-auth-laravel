@@ -41,13 +41,17 @@ class EventPolicy
         return  true;
     }
 
-    public function view()
+    public function view(User $User ,Event $Event)
     {
+        
+        dd($Event);
         return  true;
     }
 
-    public function viewAny()
+    public function viewAny(User $User)
     {
+        dd($User);
+        dd($User->can('teste'));
         return  true;
     }
 
